@@ -4,12 +4,18 @@ import TodoList from '../components/TodoList'
 
 
 const mapStateToProps = (state) => ({
-  todos: state.todos
+    todos: state.todos
 })
 
 const VisibleTodoList = connect(
-  mapStateToProps
+    mapStateToProps
 )(TodoList)
-
+ 
 
 export default VisibleTodoList
+
+/*
+    mapStateToProps(state)
+    <TodoList props={}>
+
+*/
