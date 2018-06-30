@@ -1,8 +1,12 @@
 import {
+    ADD_TODO_BEGIN,
+    ADD_TODO_SUCCESS,
+    ADD_TODO_FAILURE,    
     FETCH_TODOS_BEGIN,
     FETCH_TODOS_SUCCESS,
     FETCH_TODOS_FAILURE
 } from '../actions';
+import update from 'immutability-helper';
 
 const initialState = {
     items: [],
@@ -18,7 +22,8 @@ export default function todoReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: true,
-                error: null
+                items: [],
+                error: null,
             };
 
         case FETCH_TODOS_SUCCESS:
@@ -27,7 +32,8 @@ export default function todoReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                items: action.payload.todos
+                items: action.payload.todos,
+                error: null,
             };
 
         case FETCH_TODOS_FAILURE:
@@ -39,8 +45,34 @@ export default function todoReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
+                items: [],
                 error: action.payload.error,
-                items: []
+            };
+
+        case ADD_TODO_BEGIN:
+            return {
+                ...state,
+                loading: true,
+                items: [],
+                error: null,
+            };
+
+        case ADD_TODO_SUCCESS:
+        // const newEntries = update(this.state.entries, { $push: [newEntry] });
+            const updatedTodos = update(this.state.todos.items, { $push: action.payload.todos });
+            return { // action.payload.todos 
+                ...state,
+                loading: false,
+                items: updatedTodos,
+                error: null,
+            };
+
+        case ADD_TODO_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                items: [],
+                error: action.payload.error,
             };
 
         default:
