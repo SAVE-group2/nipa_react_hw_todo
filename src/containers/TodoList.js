@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchTodos } from "../actions";
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
-const listColorOrder = ["success", "info", "warning"];
+const listColorOrder = ["success", "info"];
 
 class TodoList extends React.Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class TodoList extends React.Component {
             <ListGroup>
                 {todos.map(todo =>
                     // <li key={todo._id}>{todo.text}</li>
-                    <ListGroupItem key={todo._id} bsStyle={listColorOrder[this.colorOrder++ % 3]}>{todo.text.replace(/['"]+/g, '')}</ListGroupItem>
+                    <ListGroupItem key={todo._id} bsStyle={listColorOrder[this.colorOrder++ % 2]}>{todo.text.replace(/['"]+/g, '')}</ListGroupItem>
                 )}                
             </ListGroup>
         );

@@ -47,7 +47,7 @@ class AddTodo extends React.Component {
                     <FormControl
                         type="text"
                         value={this.state.value}
-                        placeholder="input todo here"
+                        placeholder="input a todo here"
                         onChange={this.handleChange}
                     />
                     <FormControl.Feedback />
