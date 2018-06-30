@@ -59,7 +59,7 @@ export default function todoReducer(state = initialState, action) {
 
         case ADD_TODO_SUCCESS:
         // const newEntries = update(this.state.entries, { $push: [newEntry] });
-            const updatedTodos = update(this.state.todos.items, { $push: action.payload.todos });
+            const updatedTodos = update(state.items, { $push: action.payload.todos });
             return { // action.payload.todos 
                 ...state,
                 loading: false,
