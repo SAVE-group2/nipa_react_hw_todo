@@ -18,6 +18,7 @@
         "babel-polyfill": "^6.3.14",
         "immutability-helper": "^2.7.1",
         "react": "^0.14.7",
+        "react-bootstrap": "^0.32.1",
         "react-dom": "^0.14.7",
         "react-redux": "^4.1.2",
         "redux": "^3.1.2",

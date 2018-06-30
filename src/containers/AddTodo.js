@@ -1,30 +1,62 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { addTodo } from '../actions'
+import React from 'react';
+import { connect } from 'react-redux';
+import { addTodo } from '../actions';
+import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
 
-let AddTodo = ({ dispatch }) => {
-    let input
+class AddTodo extends React.Component {
+    constructor(props, context) {
+        super(props, context);
 
-    return (
-        <div>
-            <form onSubmit={e => {
-                e.preventDefault()
-                if (!input.value.trim()) {
-                    return
-                }
-                dispatch(addTodo(input.value))
-                input.value = ''
-            }}>
-                <input ref={node => {
-                    input = node
-                }} />
-                <button type="submit">
-                    +
-                </button>
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.state = {
+            value: ''
+        };
+    }
+
+    getValidationState() {
+        const length = this.state.value.length;
+        if (length > 10) return 'success';
+        else if (length > 5) return 'warning';
+        else if (length > 0) return 'error';
+        return null;
+    }
+
+    handleChange(e) {
+        this.setState({ value: e.target.value });
+    }
+
+    handleSubmit(e) {
+        e.preventDefault()
+        if (!this.state.value.trim()) {
+            return
+        }
+        this.props.dispatch(addTodo(this.state.value))
+        this.setState({value: ''});
+    }
+
+    render() {
+        return (
+            <form onSubmit={e => this.handleSubmit(e)}>
+                <FormGroup
+                    controlId="formBasicText"
+                    validationState={this.getValidationState()}
+                >
+                    <ControlLabel>Press enter key to insert a todo</ControlLabel>
+                    <FormControl
+                        type="text"
+                        value={this.state.value}
+                        placeholder="input todo here"
+                        onChange={this.handleChange}
+                    />
+                    <FormControl.Feedback />
+                </FormGroup>
             </form>
-        </div>
-    )
+        );
+    }
 }
-AddTodo = connect()(AddTodo)
 
-export default AddTodo
+export default AddTodo = connect()(AddTodo);
+
+// render(<FormExample />);

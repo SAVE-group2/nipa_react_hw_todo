@@ -1,11 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchTodos } from "../actions";
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
+
+const listColorOrder = ["success", "info", "warning"];
 
 class TodoList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.colorOrder = 0;
+    }
+
     componentDidMount() {
         this.props.dispatch(fetchTodos());
-    }
+    }    
 
     render() {
         const { error, loading, todos } = this.props;
@@ -19,11 +27,12 @@ class TodoList extends React.Component {
         }
 
         return (
-            <ul>
+            <ListGroup>
                 {todos.map(todo =>
-                    <li key={todo._id}>{todo.text}</li>
-                )}
-            </ul>
+                    // <li key={todo._id}>{todo.text}</li>
+                    <ListGroupItem key={todo._id} bsStyle={listColorOrder[this.colorOrder++ % 3]}>{todo.text.replace(/['"]+/g, '')}</ListGroupItem>
+                )}                
+            </ListGroup>
         );
     }
 }
