@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchTodos } from '../actions';
+import { getItems } from '../actions';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
-class TodoList extends React.Component {
+class GetItems extends React.Component {
 	constructor(props) {
 		super(props);
 		this.colorOrder = 0;
 	}
 
 	componentDidMount() {
-		this.props.dispatch(fetchTodos());
+		this.props.dispatch(getItems());
 	}
 
 	render() {
@@ -52,4 +52,4 @@ const mapStateToProps = state => {
 	});
 };
 
-export default connect(mapStateToProps)(TodoList);
+export default connect(mapStateToProps)(GetItems);

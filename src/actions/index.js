@@ -1,32 +1,34 @@
-export const FETCH_TODOS_BEGIN = 'FETCH_TODOS_BEGIN';
-export const FETCH_TODOS_SUCCESS = 'FETCH_TODOS_SUCCESS';
-export const FETCH_TODOS_FAILURE = 'FETCH_TODOS_FAILURE';
-export const ADD_TODO_BEGIN = 'ADD_TODO_BEGIN';
-export const ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS';
-export const ADD_TODO_FAILURE = 'ADD_TODO_FAILURE';
+export const GET_ITEMS_BEGIN = 'GET_ITEMS_BEGIN';
+export const GET_ITEMS_SUCCESS = 'GET_ITEMS_SUCCESS';
+export const GET_ITEMS_FAILURE = 'GET_ITEMS_FAILURE';
+export const ADD_ITEM_BEGIN = 'ADD_ITEM_BEGIN';
+export const ADD_ITEM_SUCCESS = 'ADD_ITEM_SUCCESS';
+export const ADD_ITEM_FAILURE = 'ADD_ITEM_FAILURE';
 
-const ADD_TODO_URL = 'http://18.217.198.79:3001/api/item';
-const FETCH_TODOS_URL = 'http://18.217.198.79:3001/api/list';
+// REST URL
+const ADD_ITEM_URL = 'http://18.217.198.79:8081/api/item';
+const GET_ITEMS_URL = 'http://18.217.198.79:8081/api/list';
 
-export function fetchTodos() {
+
+export function getItems() {
 	return function action(dispatch) {
-		dispatch(fetchTodosBegin());
+		dispatch(getItemsBegin());
 
-		return fetch(FETCH_TODOS_URL)
+		return fetch(GET_ITEMS_URL)
 			.then(handleErrors)
 			.then(res => res.json())
 			.then(json => {
-				dispatch(fetchTodosSuccess(json));
+				dispatch(getItemsSuccess(json));
 			})
-			.catch(error => dispatch(fetchTodosFailure(error)));
+			.catch(error => dispatch(getItemsFailure(error)));
 	};
 }
 
-export function addTodo(text) {
+export function addItem(text) {
 	return function action(dispatch) {
-		dispatch(addTodoBegin());
+		dispatch(addItemBegin());
 
-		fetch(ADD_TODO_URL, {
+		fetch(ADD_ITEM_URL, {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
@@ -39,10 +41,9 @@ export function addTodo(text) {
 			.then(handleErrors)
 			.then(res => res.json())
 			.then(json => {
-				// console.log(`add fetch returned: ${JSON.stringify(json)}`); // tbd
-				dispatch(addTodoSuccess(json));
+				dispatch(addItemSuccess(json));
 			})
-			.catch(error => dispatch(addTodoFailure(error)));
+			.catch(error => dispatch(addItemFailure(error)));
 	};
 }
 
@@ -53,31 +54,37 @@ function handleErrors(response) {
 	return response;
 }
 
-export const fetchTodosBegin = () => ({
-	type: FETCH_TODOS_BEGIN
+// Get Items related
+
+
+export const getItemsBegin = () => ({
+	type: GET_ITEMS_BEGIN
 });
 
-export const fetchTodosSuccess = todos => ({
-	type: FETCH_TODOS_SUCCESS,
+export const getItemsSuccess = todos => ({
+	type: GET_ITEMS_SUCCESS,
 	payload: { todos }
 });
 
-export const fetchTodosFailure = error => ({
-	type: FETCH_TODOS_FAILURE,
+export const getItemsFailure = error => ({
+	type: GET_ITEMS_FAILURE,
 	payload: { error }
 });
 
 
-export const addTodoBegin = () => ({
-	type: ADD_TODO_BEGIN
+// Add Item related
+
+
+export const addItemBegin = () => ({
+	type: ADD_ITEM_BEGIN
 });
 
-export const addTodoSuccess = todos => ({
-	type: ADD_TODO_SUCCESS,
+export const addItemSuccess = todos => ({
+	type: ADD_ITEM_SUCCESS,
 	payload: { todos }
 });
 
-export const addTodoFailure = error => ({
-	type: ADD_TODO_FAILURE,
+export const addItemFailure = error => ({
+	type: ADD_ITEM_FAILURE,
 	payload: { error }
 });

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { addTodo } from '../actions';
 import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
 
-class AddTodo extends React.Component {
+class AddItem extends React.Component {
 	constructor(props, context) {
 		super(props, context);
 
@@ -43,11 +43,11 @@ class AddTodo extends React.Component {
 					controlId="formBasicText"
 					validationState={this.getValidationState()}
 				>
-					<ControlLabel>Press enter key to insert a todo</ControlLabel>
+					<ControlLabel>Please, press enter key to input a your TODO</ControlLabel>
 					<FormControl
 						type="text"
 						value={this.state.value}
-						placeholder="input a todo here"
+						placeholder="input a todo"
 						onChange={this.handleChange}
 					/>
 					<FormControl.Feedback />
@@ -57,5 +57,5 @@ class AddTodo extends React.Component {
 	}
 }
 
-const AddTodoConnected = connect()(AddTodo);
-export default AddTodoConnected;
+const AddItemConnected = connect()(AddItem);
+export default AddItemConnected;
