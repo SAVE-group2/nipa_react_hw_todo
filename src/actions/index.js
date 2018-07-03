@@ -5,8 +5,8 @@ export const ADD_TODO_BEGIN = 'ADD_TODO_BEGIN';
 export const ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS';
 export const ADD_TODO_FAILURE = 'ADD_TODO_FAILURE';
 
-const ADD_TODO_URL = 'http://localhost:3001/api/item';
-const FETCH_TODOS_URL = 'http://localhost:3001/api/list';
+const ADD_TODO_URL = 'http://18.217.198.79:3001/api/item';
+const FETCH_TODOS_URL = 'http://18.217.198.79:3001/api/list';
 
 export function fetchTodos() {
 	return function action(dispatch) {
